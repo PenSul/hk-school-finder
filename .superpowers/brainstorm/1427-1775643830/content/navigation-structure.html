@@ -1,0 +1,144 @@
+<h2>Navigation & Screen Structure</h2>
+<p class="subtitle">Expo Router file-based routing -- all screens and their relationships</p>
+
+<div class="mockup">
+  <div class="mockup-header">Expo Router File Structure &rarr; Screen Map</div>
+  <div class="mockup-body" style="padding: 24px; font-size: 13px;">
+
+    <!-- File tree on left, screen map on right -->
+    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+
+      <!-- File Tree -->
+      <div style="flex: 1; min-width: 280px; background: #1E293B; color: #E2E8F0; border-radius: 8px; padding: 20px; font-family: monospace; font-size: 12px; line-height: 2;">
+        <div style="color: #F59E0B; font-weight: bold; margin-bottom: 8px;">app/</div>
+        <div style="padding-left: 16px;">
+          <div style="color: #94A3B8;">_layout.tsx <span style="color: #64748B;">-- root layout (providers, splash)</span></div>
+          <div style="color: #F59E0B; margin-top: 4px;">(tabs)/</div>
+          <div style="padding-left: 16px;">
+            <div style="color: #94A3B8;">_layout.tsx <span style="color: #64748B;">-- tab navigator (5 tabs)</span></div>
+            <div style="color: #0D9488;">discover/</div>
+            <div style="padding-left: 16px;">
+              <div>index.tsx <span style="color: #64748B;">-- school list + search + filters</span></div>
+            </div>
+            <div style="color: #0D9488;">map/</div>
+            <div style="padding-left: 16px;">
+              <div>index.tsx <span style="color: #64748B;">-- map view with pins</span></div>
+            </div>
+            <div style="color: #0D9488;">shortlist/</div>
+            <div style="padding-left: 16px;">
+              <div>index.tsx <span style="color: #64748B;">-- saved schools + status tracker</span></div>
+            </div>
+            <div style="color: #0D9488;">calendar/</div>
+            <div style="padding-left: 16px;">
+              <div>index.tsx <span style="color: #64748B;">-- calendar + events CRUD</span></div>
+            </div>
+            <div style="color: #0D9488;">settings/</div>
+            <div style="padding-left: 16px;">
+              <div>index.tsx <span style="color: #64748B;">-- preferences + data mgmt</span></div>
+            </div>
+          </div>
+          <div style="color: #F59E0B; margin-top: 4px;">school/</div>
+          <div style="padding-left: 16px;">
+            <div>[id].tsx <span style="color: #64748B;">-- K-12 school detail</span></div>
+          </div>
+          <div style="color: #F59E0B;">institution/</div>
+          <div style="padding-left: 16px;">
+            <div>[id].tsx <span style="color: #64748B;">-- HEI/university detail</span></div>
+          </div>
+          <div style="color: #F59E0B;">compare/</div>
+          <div style="padding-left: 16px;">
+            <div>index.tsx <span style="color: #64748B;">-- side-by-side comparison</span></div>
+          </div>
+          <div style="color: #F59E0B;">event/</div>
+          <div style="padding-left: 16px;">
+            <div>[id].tsx <span style="color: #64748B;">-- event detail / edit</span></div>
+            <div>create.tsx <span style="color: #64748B;">-- new event form</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Flow Diagram -->
+      <div style="flex: 1; min-width: 320px;">
+        <div style="font-weight: bold; color: #1E3A5F; margin-bottom: 16px; font-size: 14px;">Screen Navigation Flow</div>
+
+        <!-- Tab Bar -->
+        <div style="display: flex; background: #F8FAFC; border: 2px solid #1E3A5F; border-radius: 12px; padding: 8px; gap: 4px; margin-bottom: 20px;">
+          <div style="flex: 1; text-align: center; background: #1E3A5F; color: white; border-radius: 8px; padding: 8px 4px; font-size: 11px; font-weight: bold;">Discover</div>
+          <div style="flex: 1; text-align: center; padding: 8px 4px; font-size: 11px; color: #64748B;">Map</div>
+          <div style="flex: 1; text-align: center; padding: 8px 4px; font-size: 11px; color: #64748B;">Shortlist</div>
+          <div style="flex: 1; text-align: center; padding: 8px 4px; font-size: 11px; color: #64748B;">Calendar</div>
+          <div style="flex: 1; text-align: center; padding: 8px 4px; font-size: 11px; color: #64748B;">Settings</div>
+        </div>
+
+        <!-- Navigation flows -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Discover flows -->
+          <div style="background: #ECFDF5; border-radius: 8px; padding: 12px; border-left: 4px solid #0D9488;">
+            <div style="font-weight: bold; color: #0D9488; font-size: 12px; margin-bottom: 6px;">FROM DISCOVER TAB</div>
+            <div style="font-size: 11px; line-height: 1.8;">
+              <div>Tap school card &rarr; <strong>school/[id]</strong> (K-12 detail)</div>
+              <div>Tap HEI card &rarr; <strong>institution/[id]</strong> (HEI detail)</div>
+              <div>Tap "Compare Selected" bar &rarr; <strong>compare/</strong></div>
+              <div>Tap filter button &rarr; <strong>FilterSheet</strong> (bottom sheet overlay)</div>
+              <div>"View on Map" from detail &rarr; <strong>map tab</strong> (with pin focused)</div>
+            </div>
+          </div>
+
+          <!-- Map flows -->
+          <div style="background: #E0F2FE; border-radius: 8px; padding: 12px; border-left: 4px solid #0284C7;">
+            <div style="font-weight: bold; color: #0284C7; font-size: 12px; margin-bottom: 6px;">FROM MAP TAB</div>
+            <div style="font-size: 11px; line-height: 1.8;">
+              <div>Tap pin &rarr; <strong>bottom sheet preview</strong> (low snap)</div>
+              <div>"View Profile" from preview &rarr; <strong>school/[id]</strong> or <strong>institution/[id]</strong></div>
+              <div>Tap filter button &rarr; <strong>FilterSheet</strong> (same component)</div>
+            </div>
+          </div>
+
+          <!-- Shortlist flows -->
+          <div style="background: #FEF3C7; border-radius: 8px; padding: 12px; border-left: 4px solid #F59E0B;">
+            <div style="font-weight: bold; color: #D97706; font-size: 12px; margin-bottom: 6px;">FROM SHORTLIST TAB</div>
+            <div style="font-size: 11px; line-height: 1.8;">
+              <div>Tap school card &rarr; <strong>school/[id]</strong> or <strong>institution/[id]</strong></div>
+              <div>Tap "Compare Selected" bar &rarr; <strong>compare/</strong></div>
+              <div>Tap status stage &rarr; <strong>updates MMKV</strong> (inline, no navigation)</div>
+            </div>
+          </div>
+
+          <!-- Calendar flows -->
+          <div style="background: #F5F3FF; border-radius: 8px; padding: 12px; border-left: 4px solid #7C3AED;">
+            <div style="font-weight: bold; color: #7C3AED; font-size: 12px; margin-bottom: 6px;">FROM CALENDAR TAB</div>
+            <div style="font-size: 11px; line-height: 1.8;">
+              <div>Tap event &rarr; <strong>event/[id]</strong> (view/edit)</div>
+              <div>Tap "+" FAB &rarr; <strong>event/create</strong></div>
+              <div>Tap "Add to Calendar" &rarr; <strong>expo-calendar</strong> (system intent)</div>
+              <div>Tap bell &rarr; <strong>expo-notifications</strong> schedule</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay components -->
+    <div style="margin-top: 24px;">
+      <div style="font-weight: bold; color: #1E3A5F; margin-bottom: 12px; font-size: 14px;">Overlay Components (not routes -- rendered in-place)</div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div style="background: #FFF1F2; border-radius: 8px; padding: 12px; flex: 1; min-width: 180px; border: 1px solid #FECDD3;">
+          <div style="font-weight: bold; font-size: 12px; color: #E11D48;">FilterSheet</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 4px;">Single component, renders level-specific sections. Used by Discover + Map tabs. Bottom sheet (50% / 92% snap).</div>
+        </div>
+        <div style="background: #FFF1F2; border-radius: 8px; padding: 12px; flex: 1; min-width: 180px; border: 1px solid #FECDD3;">
+          <div style="font-weight: bold; font-size: 12px; color: #E11D48;">MapPreviewSheet</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 4px;">Compact bottom sheet on pin tap. Low snap (~220pt). Shows school name, address, badges + "View Profile" CTA.</div>
+        </div>
+        <div style="background: #FFF1F2; border-radius: 8px; padding: 12px; flex: 1; min-width: 180px; border: 1px solid #FECDD3;">
+          <div style="font-weight: bold; font-size: 12px; color: #E11D48;">CompareBar</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 4px;">Sticky bar above bottom nav. Shows when 2-3 schools selected. Animates in/out with Reanimated.</div>
+        </div>
+        <div style="background: #FFF1F2; border-radius: 8px; padding: 12px; flex: 1; min-width: 180px; border: 1px solid #FECDD3;">
+          <div style="font-weight: bold; font-size: 12px; color: #E11D48;">OfflineBanner</div>
+          <div style="font-size: 11px; color: #64748B; margin-top: 4px;">Non-blocking top banner when NetInfo detects no connectivity. Dismissible.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

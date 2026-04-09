@@ -1,0 +1,177 @@
+<h2>Project Structure</h2>
+<p class="subtitle">Feature-based folder organization with shared modules</p>
+
+<div class="mockup">
+  <div class="mockup-header">src/ Directory Layout</div>
+  <div class="mockup-body" style="padding: 24px; font-family: monospace; font-size: 12px; line-height: 2; background: #1E293B; color: #E2E8F0;">
+
+    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+
+      <!-- Left: Feature folders -->
+      <div style="flex: 1; min-width: 320px;">
+        <div style="color: #F59E0B; font-weight: bold; margin-bottom: 4px;">src/</div>
+
+        <!-- Database -->
+        <div style="padding-left: 16px;">
+          <div style="color: #0D9488; font-weight: bold;">db/</div>
+          <div style="padding-left: 16px;">
+            <div>schema.ts <span style="color: #64748B;">-- CREATE TABLE statements</span></div>
+            <div>seed.ts <span style="color: #64748B;">-- fetch APIs + batch INSERT</span></div>
+            <div>client.ts <span style="color: #64748B;">-- expo-sqlite instance</span></div>
+            <div>migrations.ts <span style="color: #64748B;">-- version upgrades if needed</span></div>
+          </div>
+        </div>
+
+        <!-- Repositories -->
+        <div style="padding-left: 16px; margin-top: 4px;">
+          <div style="color: #0D9488; font-weight: bold;">repositories/</div>
+          <div style="padding-left: 16px;">
+            <div>schoolRepository.ts <span style="color: #64748B;">-- K-12 queries</span></div>
+            <div>heiRepository.ts <span style="color: #64748B;">-- HEI queries</span></div>
+            <div>programmeRepository.ts <span style="color: #64748B;">-- UGC programme queries</span></div>
+            <div>calendarRepository.ts <span style="color: #64748B;">-- events CRUD</span></div>
+          </div>
+        </div>
+
+        <!-- Stores -->
+        <div style="padding-left: 16px; margin-top: 4px;">
+          <div style="color: #E11D48; font-weight: bold;">stores/</div>
+          <div style="padding-left: 16px;">
+            <div>useFilterStore.ts <span style="color: #64748B;">-- K-12 filter state</span></div>
+            <div>useUniFilterStore.ts <span style="color: #64748B;">-- university filter state</span></div>
+            <div>useCompareStore.ts <span style="color: #64748B;">-- comparison selections</span></div>
+            <div>useShortlistStore.ts <span style="color: #64748B;">-- MMKV-persisted shortlist</span></div>
+            <div>useStatusTrackerStore.ts <span style="color: #64748B;">-- MMKV-persisted stages</span></div>
+          </div>
+        </div>
+
+        <!-- Providers -->
+        <div style="padding-left: 16px; margin-top: 4px;">
+          <div style="color: #7C3AED; font-weight: bold;">providers/</div>
+          <div style="padding-left: 16px;">
+            <div>ThemeProvider.tsx <span style="color: #64748B;">-- dark/light + tokens</span></div>
+            <div>LanguageProvider.tsx <span style="color: #64748B;">-- i18n context + t()</span></div>
+            <div>DatabaseProvider.tsx <span style="color: #64748B;">-- seed gate + loading state</span></div>
+          </div>
+        </div>
+
+        <!-- Hooks -->
+        <div style="padding-left: 16px; margin-top: 4px;">
+          <div style="color: #0284C7; font-weight: bold;">hooks/</div>
+          <div style="padding-left: 16px;">
+            <div>useSchools.ts <span style="color: #64748B;">-- filtered school list from repo</span></div>
+            <div>useInstitutions.ts <span style="color: #64748B;">-- filtered HEI list</span></div>
+            <div>useProgrammes.ts <span style="color: #64748B;">-- filtered programme list</span></div>
+            <div>useSchoolCount.ts <span style="color: #64748B;">-- debounced COUNT query</span></div>
+            <div>useCalendarEvents.ts <span style="color: #64748B;">-- events by month</span></div>
+            <div>useNetworkStatus.ts <span style="color: #64748B;">-- NetInfo wrapper</span></div>
+            <div>useReducedMotion.ts <span style="color: #64748B;">-- accessibility check</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Shared + Features -->
+      <div style="flex: 1; min-width: 320px;">
+
+        <!-- Shared components -->
+        <div style="padding-left: 0;">
+          <div style="color: #F59E0B; font-weight: bold;">components/</div>
+          <div style="padding-left: 16px;">
+            <div style="color: #94A3B8; font-weight: bold;">shared/</div>
+            <div style="padding-left: 16px;">
+              <div>SchoolCard.tsx <span style="color: #64748B;">-- K-12 card (memo'd)</span></div>
+              <div>InstitutionCard.tsx <span style="color: #64748B;">-- HEI card (memo'd)</span></div>
+              <div>FilterSheet.tsx <span style="color: #64748B;">-- single reusable sheet</span></div>
+              <div>FilterChip.tsx <span style="color: #64748B;">-- colour-coded pill</span></div>
+              <div>Badge.tsx <span style="color: #64748B;">-- finance type badge</span></div>
+              <div>CompareBar.tsx <span style="color: #64748B;">-- sticky comparison bar</span></div>
+              <div>BackToTopButton.tsx <span style="color: #64748B;">-- floating scroll button</span></div>
+              <div>OfflineBanner.tsx <span style="color: #64748B;">-- connectivity warning</span></div>
+              <div>EmptyState.tsx <span style="color: #64748B;">-- reusable empty view</span></div>
+              <div>SkeletonPlaceholder.tsx <span style="color: #64748B;">-- loading skeleton</span></div>
+            </div>
+
+            <div style="color: #94A3B8; font-weight: bold; margin-top: 4px;">discover/</div>
+            <div style="padding-left: 16px;">
+              <div>EducationLevelTabs.tsx <span style="color: #64748B;">-- KG/Pri/Sec/Uni pills</span></div>
+              <div>SearchBar.tsx <span style="color: #64748B;">-- predictive search</span></div>
+              <div>ActiveFilterChips.tsx <span style="color: #64748B;">-- dismissible row</span></div>
+            </div>
+
+            <div style="color: #94A3B8; font-weight: bold; margin-top: 4px;">map/</div>
+            <div style="padding-left: 16px;">
+              <div>MapPreviewSheet.tsx <span style="color: #64748B;">-- pin tap preview</span></div>
+              <div>SchoolPin.tsx <span style="color: #64748B;">-- colour-coded marker</span></div>
+            </div>
+
+            <div style="color: #94A3B8; font-weight: bold; margin-top: 4px;">shortlist/</div>
+            <div style="padding-left: 16px;">
+              <div>StatusStepper.tsx <span style="color: #64748B;">-- 4-stage progress</span></div>
+            </div>
+
+            <div style="color: #94A3B8; font-weight: bold; margin-top: 4px;">calendar/</div>
+            <div style="padding-left: 16px;">
+              <div>CalendarGrid.tsx <span style="color: #64748B;">-- month view grid</span></div>
+              <div>EventCard.tsx <span style="color: #64748B;">-- colour-striped card</span></div>
+              <div>EventForm.tsx <span style="color: #64748B;">-- create/edit form</span></div>
+            </div>
+
+            <div style="color: #94A3B8; font-weight: bold; margin-top: 4px;">comparison/</div>
+            <div style="padding-left: 16px;">
+              <div>ComparisonTable.tsx <span style="color: #64748B;">-- scrollable table</span></div>
+              <div>ComparisonCell.tsx <span style="color: #64748B;">-- diff-highlighted cell</span></div>
+            </div>
+
+            <div style="color: #94A3B8; font-weight: bold; margin-top: 4px;">detail/</div>
+            <div style="padding-left: 16px;">
+              <div>HeroBanner.tsx <span style="color: #64748B;">-- gradient header</span></div>
+              <div>QuickInfoStrip.tsx <span style="color: #64748B;">-- 3 stat tiles</span></div>
+              <div>AccordionSection.tsx <span style="color: #64748B;">-- expandable section</span></div>
+              <div>ContactRow.tsx <span style="color: #64748B;">-- tappable contact item</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Constants + i18n -->
+        <div style="margin-top: 8px;">
+          <div style="color: #F59E0B; font-weight: bold;">constants/</div>
+          <div style="padding-left: 16px;">
+            <div>colors.ts <span style="color: #64748B;">-- theme tokens (light + dark)</span></div>
+            <div>financeTypes.ts <span style="color: #64748B;">-- badge colour map</span></div>
+            <div>districts.ts <span style="color: #64748B;">-- 18 HK districts EN/TC</span></div>
+            <div>religions.ts <span style="color: #64748B;">-- religion options EN/TC</span></div>
+            <div>eventCategories.ts <span style="color: #64748B;">-- calendar colour map</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 4px;">
+          <div style="color: #F59E0B; font-weight: bold;">i18n/</div>
+          <div style="padding-left: 16px;">
+            <div>en.json <span style="color: #64748B;">-- English translations</span></div>
+            <div>tc.json <span style="color: #64748B;">-- Traditional Chinese</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 4px;">
+          <div style="color: #F59E0B; font-weight: bold;">types/</div>
+          <div style="padding-left: 16px;">
+            <div>school.ts <span style="color: #64748B;">-- School, HEI, Programme</span></div>
+            <div>filter.ts <span style="color: #64748B;">-- filter state types</span></div>
+            <div>calendar.ts <span style="color: #64748B;">-- CalendarEvent type</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <h3>Organization Principles</h3>
+  <ul style="line-height: 1.8; font-size: 13px;">
+    <li><strong>Feature-grouped components</strong> under <code>components/</code> -- each feature has its own folder. Shared cross-feature components live in <code>shared/</code></li>
+    <li><strong>Data layer is separate</strong> -- <code>db/</code>, <code>repositories/</code>, <code>stores/</code>, and <code>hooks/</code> are top-level because they're cross-cutting</li>
+    <li><strong>Route files stay thin</strong> -- <code>app/</code> route files import and compose components from <code>src/components/</code>. Screens are assembled, not authored, in route files</li>
+    <li><strong>Types co-located by domain</strong> -- not by file type. <code>types/school.ts</code> covers School, HEI, and Programme together</li>
+    <li><strong>Constants centralized</strong> -- colour tokens, badge maps, district/religion lists. No magic values in components</li>
+  </ul>
+</div>

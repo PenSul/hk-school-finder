@@ -1,0 +1,83 @@
+<h2>Design Decisions Summary</h2>
+<p class="subtitle">Key decisions made during brainstorming -- ready for spec doc</p>
+
+<div style="display: flex; flex-direction: column; gap: 16px;">
+
+  <!-- Resolved during brainstorming -->
+  <div class="mockup">
+    <div class="mockup-header">Decisions Made During Brainstorming</div>
+    <div class="mockup-body" style="padding: 20px;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <thead>
+          <tr style="border-bottom: 2px solid #E2E8F0;">
+            <th style="text-align: left; padding: 8px; color: #1E3A5F; width: 30%;">Decision</th>
+            <th style="text-align: left; padding: 8px; color: #1E3A5F;">Resolution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #F1F5F9;">
+            <td style="padding: 8px; font-weight: bold;">School Net feature</td>
+            <td style="padding: 8px;"><span style="background: #FEE2E2; color: #DC2626; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">DROPPED</span> Not in API data, removes complexity from filters and map</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #F1F5F9;">
+            <td style="padding: 8px; font-weight: bold;">Calendar tab data</td>
+            <td style="padding: 8px;"><span style="background: #DBEAFE; color: #2563EB; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">USER CRUD</span> Personal calendar for tracking admission deadlines. Full create/edit/delete. Seeded with demo JSON for course project demo</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #F1F5F9;">
+            <td style="padding: 8px; font-weight: bold;">In-memory state</td>
+            <td style="padding: 8px;"><span style="background: #ECFDF5; color: #059669; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">ZUSTAND</span> Filter state, compare selections, education level tab. Selector-based to minimize re-renders</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #F1F5F9;">
+            <td style="padding: 8px; font-weight: bold;">Folder organization</td>
+            <td style="padding: 8px;"><span style="background: #ECFDF5; color: #059669; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">FEATURE-BASED</span> Components grouped by feature under src/components/, cross-cutting concerns (db, repos, stores, hooks) at top level</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #F1F5F9;">
+            <td style="padding: 8px; font-weight: bold;">DB access pattern</td>
+            <td style="padding: 8px;"><span style="background: #ECFDF5; color: #059669; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">REPOSITORY</span> Thin repo modules per domain encapsulate all SQL. Hooks consume repos, components consume hooks</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #F1F5F9;">
+            <td style="padding: 8px; font-weight: bold;">App / repo name</td>
+            <td style="padding: 8px;"><span style="background: #F5F3FF; color: #7C3AED; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">hk-school-finder</span> New GitHub repo to be created</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; font-weight: bold;">Schema TC columns</td>
+            <td style="padding: 8px;"><span style="background: #FEF3C7; color: #D97706; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">CORRECTED</span> All bilingual fields use consistent _en/_tc suffix pattern. Indexes on _en columns only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Carried from requirements (unchanged) -->
+  <div class="mockup">
+    <div class="mockup-header">Carried From Requirements (Unchanged)</div>
+    <div class="mockup-body" style="padding: 20px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px;">
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">Expo SDK 55 + React Native 0.83</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">TypeScript</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">Hermes engine</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">expo-sqlite primary data store</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">MMKV for small prefs only</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">@gorhom/bottom-sheet v5</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">@shopify/flash-list v2</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">react-native-reanimated v4</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">NativeWind v4 + tailwindcss ^3.4</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">gluestack-ui v3</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">react-native-maps</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">expo-notifications</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">expo-calendar</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">@sentry/react-native</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">@tanstack/react-query (seed only)</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">@react-native-community/netinfo</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">expo-localization + custom i18n</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">5-tab bottom nav</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">Fetch-on-first-launch + SQLite seed</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">Dark mode + manual override</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">EN + TC language toggle</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">WCAG 2.1 AA accessibility</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">Offline-first with banner UX</span>
+        <span style="background: #F1F5F9; padding: 6px 12px; border-radius: 6px;">useReducedMotion() respect</span>
+      </div>
+    </div>
+  </div>
+</div>

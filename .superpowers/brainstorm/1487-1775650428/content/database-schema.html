@@ -1,0 +1,331 @@
+<h2>Database Schema</h2>
+<p class="subtitle">expo-sqlite tables -- derived from the three government API datasets + user calendar events</p>
+
+<div class="mockup">
+  <div class="mockup-header">SQLite Tables &amp; Indexes</div>
+  <div class="mockup-body" style="padding: 24px; font-family: monospace; font-size: 12px; line-height: 1.6;">
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+      <!-- Schools Table -->
+      <div style="flex: 1; min-width: 300px;">
+        <div style="background: #ECFDF5; border: 2px solid #0D9488; border-radius: 8px; overflow: hidden;">
+          <div style="background: #0D9488; color: white; padding: 10px 16px; font-weight: bold; font-size: 14px;">
+            schools
+            <span style="font-weight: normal; font-size: 11px; opacity: 0.8;">(K-12 from EDB API)</span>
+          </div>
+          <div style="padding: 12px 16px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="padding: 4px 0; color: #F59E0B;">PK</td>
+                <td style="padding: 4px 8px; font-weight: bold;">school_no</td>
+                <td style="color: #64748B;">TEXT NOT NULL</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">name_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">name_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">category_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">category_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">address_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">address_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 4px 8px;">school_level</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 4px 8px;">district</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 4px 8px;">finance_type</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 4px 8px;">religion</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 4px 8px;">session</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 4px 8px;">students_gender</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">telephone</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">fax</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">website</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #D1FAE5;">
+                <td></td>
+                <td style="padding: 4px 8px;">latitude</td>
+                <td style="color: #64748B;">REAL</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="padding: 4px 8px;">longitude</td>
+                <td style="color: #64748B;">REAL</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: HEI + Programmes -->
+      <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 20px;">
+
+        <!-- HEI Table -->
+        <div style="background: #E0F2FE; border: 2px solid #0284C7; border-radius: 8px; overflow: hidden;">
+          <div style="background: #0284C7; color: white; padding: 10px 16px; font-weight: bold; font-size: 14px;">
+            hei_institutions
+            <span style="font-weight: normal; font-size: 11px; opacity: 0.8;">(122 from ASFPS API)</span>
+          </div>
+          <div style="padding: 12px 16px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #BAE6FD;">
+                <td style="padding: 3px 0; color: #F59E0B;">PK</td>
+                <td style="padding: 3px 8px; font-weight: bold;">objectid</td>
+                <td style="color: #64748B;">INTEGER NOT NULL</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #BAE6FD;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">facility_name_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #BAE6FD;">
+                <td></td>
+                <td style="padding: 3px 8px;">facility_name_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #BAE6FD;">
+                <td></td>
+                <td style="padding: 3px 8px;">address_en / address_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #BAE6FD;">
+                <td></td>
+                <td style="padding: 3px 8px;">telephone / fax / email</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #BAE6FD;">
+                <td></td>
+                <td style="padding: 3px 8px;">website</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="padding: 3px 8px;">latitude / longitude</td>
+                <td style="color: #64748B;">REAL</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Programmes Table -->
+        <div style="background: #FEF3C7; border: 2px solid #D97706; border-radius: 8px; overflow: hidden;">
+          <div style="background: #D97706; color: white; padding: 10px 16px; font-weight: bold; font-size: 14px;">
+            ugc_programmes
+            <span style="font-weight: normal; font-size: 11px; opacity: 0.8;">(~1031 from UGC API)</span>
+          </div>
+          <div style="padding: 12px 16px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td style="padding: 3px 0; color: #F59E0B;">PK</td>
+                <td style="padding: 3px 8px; font-weight: bold;">objectid</td>
+                <td style="color: #64748B;">INTEGER NOT NULL</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">university_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td></td>
+                <td style="padding: 3px 8px;">university_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">programme_name_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td></td>
+                <td style="padding: 3px 8px;">programme_name_tc</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">level_of_study_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #FDE68A;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">mode_of_study_en</td>
+                <td style="color: #64748B;">TEXT</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="padding: 3px 8px;">latitude / longitude</td>
+                <td style="color: #64748B;">REAL</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar Events Table -->
+    <div style="margin-top: 20px;">
+      <div style="background: #F5F3FF; border: 2px solid #7C3AED; border-radius: 8px; overflow: hidden;">
+        <div style="background: #7C3AED; color: white; padding: 10px 16px; font-weight: bold; font-size: 14px;">
+          calendar_events
+          <span style="font-weight: normal; font-size: 11px; opacity: 0.8;">(user-created + seeded demo data)</span>
+        </div>
+        <div style="padding: 12px 16px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+            <table style="border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td style="padding: 3px 0; color: #F59E0B;">PK</td>
+                <td style="padding: 3px 8px; font-weight: bold;">id</td>
+                <td style="color: #64748B;">TEXT NOT NULL</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">UUID</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td></td>
+                <td style="padding: 3px 8px;">title</td>
+                <td style="color: #64748B;">TEXT NOT NULL</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">user-entered name</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td></td>
+                <td style="padding: 3px 8px;">description</td>
+                <td style="color: #64748B;">TEXT</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">optional notes</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">event_date</td>
+                <td style="color: #64748B;">TEXT NOT NULL</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">ISO 8601 date</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td></td>
+                <td style="padding: 3px 8px;">event_time</td>
+                <td style="color: #64748B;">TEXT</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">optional HH:MM</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td style="color: #7C3AED;">IDX</td>
+                <td style="padding: 3px 8px;">category</td>
+                <td style="color: #64748B;">TEXT NOT NULL</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">poa | kg | open_day | sspa | custom</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td></td>
+                <td style="padding: 3px 8px;">school_no</td>
+                <td style="color: #64748B;">TEXT</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">optional FK to schools</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9D5FF;">
+                <td></td>
+                <td style="padding: 3px 8px;">reminder_enabled</td>
+                <td style="color: #64748B;">INTEGER DEFAULT 0</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">boolean flag</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="padding: 3px 8px;">is_seeded</td>
+                <td style="color: #64748B;">INTEGER DEFAULT 0</td>
+                <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">1 = demo data, 0 = user-created</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metadata table -->
+    <div style="margin-top: 20px;">
+      <div style="background: #F8FAFC; border: 2px solid #94A3B8; border-radius: 8px; overflow: hidden;">
+        <div style="background: #64748B; color: white; padding: 10px 16px; font-weight: bold; font-size: 14px;">
+          db_metadata
+          <span style="font-weight: normal; font-size: 11px; opacity: 0.8;">(tracks seed state for update checks)</span>
+        </div>
+        <div style="padding: 12px 16px;">
+          <table style="border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid #E2E8F0;">
+              <td style="padding: 3px 0; color: #F59E0B;">PK</td>
+              <td style="padding: 3px 8px; font-weight: bold;">key</td>
+              <td style="color: #64748B;">TEXT NOT NULL</td>
+              <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">'schools_count', 'hei_count', 'programmes_count', 'last_seed_ts'</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style="padding: 3px 8px;">value</td>
+              <td style="color: #64748B;">TEXT NOT NULL</td>
+              <td style="color: #94A3B8; padding-left: 12px; font-size: 11px;">record count or ISO timestamp</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div style="margin-top: 16px; display: flex; gap: 20px; font-size: 11px; color: #64748B;">
+      <div><span style="color: #F59E0B; font-weight: bold;">PK</span> = Primary Key</div>
+      <div><span style="color: #7C3AED; font-weight: bold;">IDX</span> = Indexed column (used in WHERE/LIKE clauses)</div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <h3>Design Notes</h3>
+  <ul style="line-height: 1.8; font-size: 13px;">
+    <li><strong>All column names are snake_case</strong> -- mapped from the API's UPPER_CASE fields during seeding</li>
+    <li><strong>calendar_events</strong> supports full CRUD -- user-created events + seeded demo data (distinguished by <code>is_seeded</code> flag)</li>
+    <li><strong>db_metadata</strong> tracks record counts per table -- on subsequent launches, compare with API response count to detect updates</li>
+    <li><strong>No foreign keys between school tables</strong> -- the 3 datasets are independent with no shared keys. UGC programmes link to universities by name, not by ID</li>
+    <li><strong>Text columns for flexible data</strong> -- API values vary (e.g., "NOT APPLICABLE" vs empty for religion). Handle at the repository layer, not schema level</li>
+  </ul>
+</div>
