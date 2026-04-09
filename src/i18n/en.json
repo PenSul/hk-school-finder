@@ -62,5 +62,13 @@
   "compare_empty_message": "Select 2-3 schools from the Discover tab to compare",
   "compare_clear": "Clear All",
   "compare_back_discover": "Back to Discover",
-  "compare_programme_count": "Programme Count"
+  "compare_programme_count": "Programme Count",
+  "map_post_sec": "Post-Sec",
+  "map_view_profile": "View Profile",
+  "map_directions": "Directions",
+  "map_my_location": "My Location",
+  "map_location_denied": "Location permission denied",
+  "map_layer_standard": "Standard",
+  "map_layer_satellite": "Satellite",
+  "map_layer_terrain": "Terrain"
 }

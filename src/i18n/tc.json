@@ -62,5 +62,13 @@
   "compare_empty_message": "從探索頁面選擇2至3間學校進行比較",
   "compare_clear": "清除全部",
   "compare_back_discover": "返回探索",
-  "compare_programme_count": "課程數量"
+  "compare_programme_count": "課程數量",
+  "map_post_sec": "專上教育",
+  "map_view_profile": "查看詳情",
+  "map_directions": "導航",
+  "map_my_location": "我的位置",
+  "map_location_denied": "位置權限被拒絕",
+  "map_layer_standard": "標準",
+  "map_layer_satellite": "衛星",
+  "map_layer_terrain": "地形"
 }
