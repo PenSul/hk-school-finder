@@ -26,7 +26,7 @@ export function useMapPins() {
     setError(null);
 
     if (educationLevel === "UNIVERSITY") {
-      getInstitutionsForMap(db).then((institutions) => {
+      getInstitutionsForMap(db, searchQuery).then((institutions) => {
         if (!cancelled) {
           setPins(institutions.map(institutionToMapPin));
           setLoading(false);

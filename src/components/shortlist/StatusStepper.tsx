@@ -37,34 +37,37 @@ export const StatusStepper = memo(function StatusStepper({ schoolId }: StatusSte
       {STAGES.map((stage, index) => {
         const isActive = index <= currentIndex;
         const isLast = index === STAGES.length - 1;
+
         return (
           <View key={stage.key} style={styles.stepWrapper}>
-            <View style={styles.stepRow}>
-              <Pressable
-                onPress={() => handlePress(stage.key)}
+            {!isLast && (
+              <View
                 style={[
-                  styles.circle,
-                  { backgroundColor: isActive ? COLORS.accent : COLORS.light.hairline },
+                  styles.connector,
+                  {
+                    backgroundColor: index < currentIndex ? COLORS.accent : COLORS.light.hairline
+                  },
                 ]}
-                accessibilityRole="button"
-                accessibilityLabel={t(stage.i18nKey)}
-                accessibilityState={{ selected: isActive }}
-              >
-                {isActive ? (
-                  <Ionicons name="checkmark" size={12} color={COLORS.light.surface} />
-                ) : (
-                  <Text style={styles.stepNumber}>{index + 1}</Text>
-                )}
-              </Pressable>
-              {!isLast && (
-                <View
-                  style={[
-                    styles.connector,
-                    { backgroundColor: index < currentIndex ? COLORS.accent : COLORS.light.hairline },
-                  ]}
-                />
+              />
+            )}
+
+            <Pressable
+              onPress={() => handlePress(stage.key)}
+              style={[
+                styles.circle,
+                { backgroundColor: isActive ? COLORS.accent : COLORS.light.hairline },
+              ]}
+              accessibilityRole="button"
+              accessibilityLabel={t(stage.i18nKey)}
+              accessibilityState={{ selected: isActive }}
+            >
+              {isActive ? (
+                <Ionicons name="checkmark" size={12} color={COLORS.light.surface} />
+              ) : (
+                <Text style={styles.stepNumber}>{index + 1}</Text>
               )}
-            </View>
+            </Pressable>
+
             <Text
               style={[
                 styles.label,
@@ -85,18 +88,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "flex-start",
+    justifyContent: "space-between",
     paddingVertical: 8,
-    paddingHorizontal: 4,
+    width: "100%",
   },
   stepWrapper: {
     flex: 1,
     alignItems: "center",
-  },
-  stepRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    justifyContent: "center",
+    position: "relative",
   },
   circle: {
     width: 24,
@@ -104,11 +103,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 2,
   },
   connector: {
-    flex: 1,
+    position: "absolute",
     height: 2,
-    marginHorizontal: 2,
+    top: 11,
+    left: "50%",
+    right: "-50%",
+    zIndex: 1,
   },
   stepNumber: {
     fontSize: 10,
@@ -118,7 +121,8 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 10,
     fontWeight: "500",
-    marginTop: 4,
+    marginTop: 8,
     textAlign: "center",
+    width: "100%",
   },
 });

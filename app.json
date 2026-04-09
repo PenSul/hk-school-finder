@@ -5,7 +5,6 @@
     "version": "1.0.0",
     "scheme": "hk-school-finder",
     "orientation": "portrait",
-    "newArchEnabled": true,
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -19,17 +18,33 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundColor": "#1E3A5F"
       },
       "package": "com.hkschoolfinder.app",
-      "usesCleartextTraffic": true
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCYsGXvWu1-tMQSTvxG7eG3oVBiVTy7c7o"
+        }
+      }
     },
     "plugins": [
       "expo-router",
       "expo-font",
       "expo-localization",
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "expo-location",
+        { "locationWhenInUsePermission": "Allow HK School Finder to use your location to show nearby schools on the map." }
+      ],
+      [
+        "expo-notifications",
+        { "icon": "./assets/icon.png" }
+      ],
+      [
+        "expo-calendar",
+        { "calendarPermission": "Allow HK School Finder to export events to your calendar." }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

@@ -17,6 +17,9 @@ export function EducationLevelTabs() {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
+      // This forces the ScrollView to only take up necessary height
+      style={{ flexGrow: 0 }}
+      contentContainerStyle={{ alignItems: 'center' }}
       contentContainerClassName="px-4 py-2"
     >
       {LEVELS.map((level) => {
@@ -25,17 +28,11 @@ export function EducationLevelTabs() {
           <Pressable
             key={level.key}
             onPress={() => setEducationLevel(level.key)}
-            className={`rounded-full px-4 py-2 mr-2 min-h-[36px] items-center justify-center ${
+            className={`rounded-full px-4 py-1.5 mr-2 items-center justify-center ${
               isActive ? "bg-primary" : "bg-surface-light border border-hairline"
             }`}
-            accessibilityRole="tab"
-            accessibilityState={{ selected: isActive }}
           >
-            <Text
-              className={`text-sm font-medium ${
-                isActive ? "text-white" : "text-text-primary"
-              }`}
-            >
+            <Text className={`text-sm font-medium ${isActive ? "text-white" : "text-text-primary"}`}>
               {level.label}
             </Text>
           </Pressable>
@@ -44,3 +41,4 @@ export function EducationLevelTabs() {
     </ScrollView>
   );
 }
+

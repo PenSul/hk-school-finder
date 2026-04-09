@@ -29,22 +29,28 @@ export function ActiveFilterChips() {
 
   if (chips.length === 0) return null;
 
-  return (
+return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerClassName="px-4 pb-2"
+      style={{ flexGrow: 0 }} // Matching your EducationLevelTabs style
+      contentContainerStyle={{ alignItems: 'center' }}
+      contentContainerClassName="px-4 py-3" // Increased py slightly for the overall container
     >
       {chips.map((chip) => (
         <Pressable
           key={chip.label}
           onPress={chip.onRemove}
-          className="flex-row items-center bg-primary/10 rounded-full px-3 py-1.5 mr-2"
+          // Changed to py-1.5 and added a subtle border to match the tabs
+          className="flex-row items-center bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mr-2"
           accessibilityRole="button"
           accessibilityLabel={`Remove ${chip.label} filter`}
         >
-          <Text className="text-xs text-primary mr-1">{chip.label}</Text>
-          <Ionicons name="close" size={12} color="#1E3A5F" />
+          {/* Changed text-xs to text-sm and added font-medium for consistency */}
+          <Text className="text-sm font-medium text-primary mr-2 uppercase tracking-wide">
+            {chip.label}
+          </Text>
+          <Ionicons name="close-circle-sharp" size={14} color="#1E3A5F" />
         </Pressable>
       ))}
     </ScrollView>

@@ -1,11 +1,10 @@
 import "../global.css";
-import { useEffect, type ReactNode } from "react";
+import { Suspense, useEffect, type ReactNode } from "react";
+import { View, Text, ActivityIndicator } from "react-native";
 import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import * as SplashScreen from "expo-splash-screen";
 import { SQLiteProvider, type SQLiteDatabase } from "expo-sqlite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useColorScheme } from "nativewind";
 import { DATABASE_NAME } from "@/db/client";
 import { createTables } from "@/db/schema";
@@ -13,8 +12,6 @@ import { migrateIfNeeded } from "@/db/migrations";
 import { DatabaseProvider } from "@/providers/DatabaseProvider";
 import { ThemeProvider, useTheme } from "@/providers/ThemeProvider";
 import { LanguageProvider } from "@/providers/LanguageProvider";
-
-SplashScreen.preventAutoHideAsync();
 
 /** Syncs our ThemeProvider colorScheme to NativeWind so dark: classes work */
 function DarkModeSync({ children }: { children: ReactNode }) {
@@ -34,26 +31,25 @@ async function initDatabase(db: SQLiteDatabase): Promise<void> {
 }
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
-    ...Ionicons.font,
-  });
-
-  useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) return null;
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SQLiteProvider databaseName={DATABASE_NAME} onInit={initDatabase}>
+      <BottomSheetModalProvider>
+      <Suspense fallback={
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#1E3A5F" }}>
+          <ActivityIndicator size="large" color="#FFFFFF" />
+          <Text style={{ color: "#FFFFFF", marginTop: 16 }}>Loading...</Text>
+        </View>
+      }>
+      <SQLiteProvider
+        databaseName={DATABASE_NAME}
+        onInit={initDatabase}
+      >
         <DatabaseProvider>
           <ThemeProvider>
             <DarkModeSync>
             <LanguageProvider>
               <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
                 <Stack.Screen name="(tabs)" />
                 <Stack.Screen
                   name="school/[id]"
@@ -81,6 +77,8 @@ export default function RootLayout() {
           </ThemeProvider>
         </DatabaseProvider>
       </SQLiteProvider>
+      </Suspense>
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 }

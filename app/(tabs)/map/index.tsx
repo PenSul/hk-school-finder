@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MapView, { Marker } from "react-native-maps";
 import type { MapPressEvent, Region } from "react-native-maps";
 import type BottomSheet from "@gorhom/bottom-sheet";
+import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useMapPins } from "@/hooks/useMapPins";
 import { useFilterStore } from "@/stores/useFilterStore";
@@ -54,7 +55,7 @@ export default function MapScreen() {
 
   const mapRef = useRef<any>(null);
   const filterSheetRef = useRef<BottomSheet>(null);
-  const previewSheetRef = useRef<BottomSheet>(null);
+  const previewSheetRef = useRef<BottomSheetModal>(null);
 
   const [selectedPin, setSelectedPin] = useState<MapPin | null>(null);
   const [mapType, setMapType] = useState<MapType>("standard");
@@ -69,8 +70,18 @@ export default function MapScreen() {
 
   const onMarkerPress = useCallback((pin: MapPin) => {
     setSelectedPin(pin);
-    previewSheetRef.current?.snapToIndex(0);
+    previewSheetRef.current?.present();
   }, []);
+
+  const handleMapMarkerPress = useCallback(
+    (e: { nativeEvent: { id?: string } }) => {
+      const markerId = e.nativeEvent.id;
+      if (!markerId) return;
+      const pin = pins.find((p) => p.id === markerId);
+      if (pin) onMarkerPress(pin);
+    },
+    [pins, onMarkerPress]
+  );
 
   const onPreviewClose = useCallback(() => {
     setSelectedPin(null);
@@ -107,7 +118,8 @@ export default function MapScreen() {
   }, [t]);
 
   const onMapPress = useCallback((_e: MapPressEvent) => {
-    previewSheetRef.current?.close();
+    previewSheetRef.current?.dismiss();
+    setSelectedPin(null);
   }, []);
 
   return (
@@ -122,6 +134,7 @@ export default function MapScreen() {
         showsMyLocationButton={false}
         showsCompass={false}
         onPress={onMapPress}
+        onMarkerPress={handleMapMarkerPress}
       >
         {pins.map((pin) => (
           <Marker
@@ -132,7 +145,6 @@ export default function MapScreen() {
               longitude: pin.longitude,
             }}
             tracksViewChanges={false}
-            onPress={() => onMarkerPress(pin)}
             accessibilityLabel={pin.nameEn}
           >
             <SchoolPin financeType={pin.financeType} />

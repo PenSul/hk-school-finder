@@ -61,10 +61,23 @@ export async function getInstitutionCount(
 }
 
 export async function getInstitutionsForMap(
-  db: SQLiteDatabase
+  db: SQLiteDatabase,
+  searchQuery = ""
 ): Promise<HeiInstitution[]> {
+  const conditions: string[] = ["latitude != 0 AND longitude != 0"];
+  const params: (string | number)[] = [];
+
+  if (searchQuery.trim()) {
+    conditions.push(
+      "(facility_name_en LIKE ? OR facility_name_tc LIKE ? OR address_en LIKE ?)"
+    );
+    const q = `%${searchQuery.trim()}%`;
+    params.push(q, q, q);
+  }
+
   return db.getAllAsync<HeiInstitution>(
-    "SELECT * FROM hei_institutions WHERE latitude != 0 AND longitude != 0"
+    `SELECT * FROM hei_institutions WHERE ${conditions.join(" AND ")}`,
+    params
   );
 }
 

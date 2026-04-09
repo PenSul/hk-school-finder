@@ -1,6 +1,6 @@
 import { forwardRef, useMemo, useCallback } from "react";
 import { View, Text, Pressable, Linking, Platform, StyleSheet } from "react-native";
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import type { BottomSheetBackdropProps } from "@gorhom/bottom-sheet";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
@@ -15,7 +15,7 @@ interface MapPreviewSheetProps {
   onClose: () => void;
 }
 
-export const MapPreviewSheet = forwardRef<BottomSheet, MapPreviewSheetProps>(
+export const MapPreviewSheet = forwardRef<BottomSheetModal, MapPreviewSheetProps>(
   function MapPreviewSheet({ pin, onClose }, ref) {
     const snapPoints = useMemo(() => [220], []);
     const router = useRouter();
@@ -86,12 +86,11 @@ export const MapPreviewSheet = forwardRef<BottomSheet, MapPreviewSheetProps>(
       : "";
 
     return (
-      <BottomSheet
+      <BottomSheetModal
         ref={ref}
-        index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose
-        onClose={onClose}
+        onDismiss={onClose}
         backdropComponent={renderBackdrop}
         handleIndicatorStyle={{ backgroundColor: COLORS.light.textSecondary }}
       >
@@ -163,7 +162,7 @@ export const MapPreviewSheet = forwardRef<BottomSheet, MapPreviewSheetProps>(
             </Pressable>
           </View>
         </View>
-      </BottomSheet>
+      </BottomSheetModal>
     );
   }
 );
