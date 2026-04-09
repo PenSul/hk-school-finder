@@ -34,6 +34,12 @@ const HK_REGION: Region = {
 type MapType = "standard" | "satellite" | "terrain";
 const MAP_TYPES: MapType[] = ["standard", "satellite", "terrain"];
 
+const MAP_TYPE_I18N: Record<MapType, string> = {
+  standard: "map_layer_standard",
+  satellite: "map_layer_satellite",
+  terrain: "map_layer_terrain",
+};
+
 export default function MapScreen() {
   const insets = useSafeAreaInsets();
   const { t } = useLanguage();
@@ -157,7 +163,7 @@ export default function MapScreen() {
         onPress={cycleMapType}
         style={[styles.floatingBtn, { top: insets.top + 120, right: 16 }]}
         accessibilityRole="button"
-        accessibilityLabel={t("map_layer_standard")}
+        accessibilityLabel={t(MAP_TYPE_I18N[mapType])}
       >
         <Ionicons name="layers-outline" size={22} color={COLORS.primary} />
       </Pressable>
@@ -202,7 +208,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.light.surface,
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",

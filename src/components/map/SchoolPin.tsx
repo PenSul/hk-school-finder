@@ -15,7 +15,7 @@ export const SchoolPin = memo(function SchoolPin({ financeType }: SchoolPinProps
   return (
     <View style={[styles.outer, { borderColor: color }]}>
       <View style={[styles.inner, { backgroundColor: color }]}>
-        <Ionicons name="school-outline" size={12} color="#FFFFFF" />
+        <Ionicons name="school-outline" size={12} color={COLORS.light.surface} />
       </View>
     </View>
   );

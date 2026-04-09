@@ -18,15 +18,22 @@ export function useMapPins() {
 
   const [pins, setPins] = useState<MapPin[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
+    setError(null);
 
     if (educationLevel === "UNIVERSITY") {
       getInstitutionsForMap(db).then((institutions) => {
         if (!cancelled) {
           setPins(institutions.map(institutionToMapPin));
+          setLoading(false);
+        }
+      }).catch((err) => {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Failed to load map data");
           setLoading(false);
         }
       });
@@ -43,6 +50,11 @@ export function useMapPins() {
       getSchoolsForMap(db, filters).then((schools) => {
         if (!cancelled) {
           setPins(schools.map(schoolToMapPin));
+          setLoading(false);
+        }
+      }).catch((err) => {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Failed to load map data");
           setLoading(false);
         }
       });
@@ -62,5 +74,5 @@ export function useMapPins() {
     genders,
   ]);
 
-  return { pins, loading };
+  return { pins, loading, error };
 }

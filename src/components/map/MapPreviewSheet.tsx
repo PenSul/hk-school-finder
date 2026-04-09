@@ -7,6 +7,7 @@ import { useRouter } from "expo-router";
 import { Badge } from "@/components/shared/Badge";
 import { useShortlistStore } from "@/stores/useShortlistStore";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { COLORS } from "@/constants/colors";
 import type { MapPin } from "@/types/map";
 
 interface MapPreviewSheetProps {
@@ -92,7 +93,7 @@ export const MapPreviewSheet = forwardRef<BottomSheet, MapPreviewSheetProps>(
         enablePanDownToClose
         onClose={onClose}
         backdropComponent={renderBackdrop}
-        handleIndicatorStyle={{ backgroundColor: "#64748B" }}
+        handleIndicatorStyle={{ backgroundColor: COLORS.light.textSecondary }}
       >
         <View style={styles.content}>
           {/* Header: name + shortlist heart */}
@@ -120,7 +121,7 @@ export const MapPreviewSheet = forwardRef<BottomSheet, MapPreviewSheetProps>(
               <Ionicons
                 name={isShortlisted ? "heart" : "heart-outline"}
                 size={24}
-                color={isShortlisted ? "#F59E0B" : "#64748B"}
+                color={isShortlisted ? COLORS.accent : COLORS.light.textSecondary}
               />
             </Pressable>
           </View>
@@ -155,7 +156,7 @@ export const MapPreviewSheet = forwardRef<BottomSheet, MapPreviewSheetProps>(
               accessibilityRole="button"
               accessibilityLabel={t("map_directions")}
             >
-              <Ionicons name="navigate-outline" size={16} color="#1E3A5F" />
+              <Ionicons name="navigate-outline" size={16} color={COLORS.primary} />
               <Text style={styles.directionsText}>
                 {t("map_directions")}
               </Text>
@@ -184,11 +185,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#1E293B",
+    color: COLORS.light.textPrimary,
   },
   subName: {
     fontSize: 13,
-    color: "#64748B",
+    color: COLORS.light.textSecondary,
     marginTop: 2,
   },
   badgeRow: {
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 13,
-    color: "#64748B",
+    color: COLORS.light.textSecondary,
     marginTop: 8,
   },
   ctaRow: {
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   },
   viewProfileBtn: {
     flex: 1,
-    backgroundColor: "#F59E0B",
+    backgroundColor: COLORS.accent,
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",
@@ -216,12 +217,12 @@ const styles = StyleSheet.create({
   viewProfileText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#FFFFFF",
+    color: COLORS.light.surface,
   },
   directionsBtn: {
     flex: 1,
     borderWidth: 1.5,
-    borderColor: "#1E3A5F",
+    borderColor: COLORS.primary,
     borderRadius: 8,
     paddingVertical: 12,
     flexDirection: "row",
@@ -232,6 +233,6 @@ const styles = StyleSheet.create({
   directionsText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#1E3A5F",
+    color: COLORS.primary,
   },
 });

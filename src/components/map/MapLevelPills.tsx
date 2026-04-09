@@ -2,13 +2,14 @@ import { memo } from "react";
 import { ScrollView, Pressable, Text, StyleSheet } from "react-native";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { COLORS } from "@/constants/colors";
 import type { EducationLevel } from "@/types/filter";
 
-const LEVELS: { key: EducationLevel; enLabel: string; i18nKey: string }[] = [
-  { key: "KG", enLabel: "KG", i18nKey: "education_kg" },
-  { key: "PRIMARY", enLabel: "Primary", i18nKey: "education_primary" },
-  { key: "SECONDARY", enLabel: "Secondary", i18nKey: "education_secondary" },
-  { key: "UNIVERSITY", enLabel: "Post-Sec", i18nKey: "map_post_sec" },
+const LEVELS: { key: EducationLevel; i18nKey: string }[] = [
+  { key: "KG", i18nKey: "education_kg" },
+  { key: "PRIMARY", i18nKey: "education_primary" },
+  { key: "SECONDARY", i18nKey: "education_secondary" },
+  { key: "UNIVERSITY", i18nKey: "map_post_sec" },
 ];
 
 export const MapLevelPills = memo(function MapLevelPills() {
@@ -70,21 +71,21 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   pillActive: {
-    backgroundColor: "#1E3A5F",
+    backgroundColor: COLORS.primary,
   },
   pillInactive: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.light.surface,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: COLORS.light.hairline,
   },
   pillText: {
     fontSize: 14,
     fontWeight: "500",
   },
   pillTextActive: {
-    color: "#FFFFFF",
+    color: COLORS.light.surface,
   },
   pillTextInactive: {
-    color: "#1E293B",
+    color: COLORS.light.textPrimary,
   },
 });
