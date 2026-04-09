@@ -25,12 +25,14 @@ export function useProgrammesByInstitution(
 
     setLoading(true);
     timerRef.current = setTimeout(() => {
-      getProgrammesByUniversity(db, universityEn, searchQuery).then(
-        (result) => {
+      getProgrammesByUniversity(db, universityEn, searchQuery)
+        .then((result) => {
           setProgrammes(result);
           setLoading(false);
-        }
-      );
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     }, searchQuery ? DEBOUNCE_MS : 0);
 
     return () => {

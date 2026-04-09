@@ -11,12 +11,16 @@ export function useInstitutionById(objectid: number) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    getInstitutionById(db, objectid).then((result) => {
-      if (!cancelled) {
-        setInstitution(result);
-        setLoading(false);
-      }
-    });
+    getInstitutionById(db, objectid)
+      .then((result) => {
+        if (!cancelled) {
+          setInstitution(result);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
     return () => {
       cancelled = true;
     };

@@ -203,7 +203,7 @@ export default function CompareScreen() {
                   style={{ width: 100 }}
                 >
                   <Text className="text-xs font-semibold text-text-secondary">
-                    {compareType === "school" ? "School" : "Institution"}
+                    {compareType === "school" ? t("screen_school_detail") : t("screen_institution_detail")}
                   </Text>
                 </View>
                 {items.map((item) => (
@@ -229,6 +229,7 @@ export default function CompareScreen() {
                     <Pressable
                       onPress={() => removeSchool(item.id)}
                       className="mt-2"
+                      hitSlop={12}
                       accessibilityRole="button"
                       accessibilityLabel={`Remove ${item.name_en}`}
                     >
@@ -265,8 +266,7 @@ export default function CompareScreen() {
                       </Text>
                     </View>
                     {values.map((val, idx) => {
-                      const isDiff =
-                        hasDiff && val !== firstVal;
+                      const isDiff = hasDiff;
                       return (
                         <View
                           key={items[idx].id}

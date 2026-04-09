@@ -11,12 +11,16 @@ export function useSchoolById(schoolNo: string) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    getSchoolById(db, schoolNo).then((result) => {
-      if (!cancelled) {
-        setSchool(result);
-        setLoading(false);
-      }
-    });
+    getSchoolById(db, schoolNo)
+      .then((result) => {
+        if (!cancelled) {
+          setSchool(result);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
     return () => {
       cancelled = true;
     };
