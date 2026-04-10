@@ -41,5 +41,5 @@ yarn-error.*
 /android
 
 # superpowers
-.superpowers
 docs/superpowers
+.superpowers/brainstorm

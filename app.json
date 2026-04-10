@@ -24,7 +24,7 @@
       "package": "com.hkschoolfinder.app",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyCYsGXvWu1-tMQSTvxG7eG3oVBiVTy7c7o"
+          "apiKey": "MAP_SDK_FOR_ANDROID_API_KEY"
         }
       }
     },
