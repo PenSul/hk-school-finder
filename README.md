@@ -230,7 +230,7 @@ Data is fetched once on first launch and stored locally in SQLite. The app works
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/hk-school-finder.git
+git clone https://github.com/PenSul/hk-school-finder.git
 cd hk-school-finder
 
 # Install dependencies
@@ -278,50 +278,6 @@ npm test
 
 ---
 
-## Summary
-
-HK School Finder is a local-first, offline-capable mobile application that consolidates Hong Kong's fragmented school data into a single, bilingual interface. It serves parents, students, and educators who need to research schools across all education levels -- from kindergarten to postgraduate programmes -- without navigating multiple government portals.
-
-The app provides five core workflows through its tab-based navigation: discovering schools with advanced filtering, exploring locations on an interactive map, building a shortlist with application status tracking, managing admission events with push notification reminders, and personalizing the experience through theme and language settings.
-
-## Methods
-
-### Development Approach
-
-The project was developed using a **plan-driven, iterative approach** across six sequential implementation phases:
-
-1. **Foundation** -- Project scaffolding, database schema, data seeding pipeline
-2. **State & Navigation** -- Zustand stores, React Context providers, Expo Router tab layout
-3. **Discover & Filters** -- Search, multi-criteria filtering, FlashList pagination
-4. **Detail & Comparison** -- School/institution detail pages, side-by-side comparison
-5. **Map View** -- Google Maps integration, custom pins, preview sheets, GPS location
-6. **Shortlist, Calendar & Settings** -- Persistence, event management, notifications, preferences
-
-### Technical Methods
-
-- **Local-First Architecture** -- All data stored in SQLite after initial fetch; no backend dependency for subsequent use
-- **Repository Pattern** -- SQL queries encapsulated in repository modules, accessed through custom React hooks
-- **Separation of Concerns** -- Zustand for UI state, MMKV for persistent preferences, SQLite for structured data
-- **Bilingual Data Model** -- All database fields use `_en`/`_tc` suffix convention for consistent internationalization
-- **Type Safety** -- Full TypeScript strict mode with comprehensive type definitions for all data models, filter states, and component props
-
-### Data Processing
-
-- Raw EDB JSON and CSDI GeoJSON parsed and normalized during seeding (e.g., "N.A." values converted to empty strings)
-- Indexes created on frequently filtered columns (`district_en`, `finance_type_en`, `religion_en`, `session_en`, `students_gender_en`) for query performance
-- Dynamic SQL WHERE clause construction supports any combination of active filters
-
-## Results
-
-- Aggregates **2,500+ Schools**, **122 higher education institutions**, and **~1,031 UGC-funded programmes** into a single searchable interface
-- Supports **multi-criteria filtering** across 6 dimensions (district, finance type, religion, session, gender, search query) with real-time result counts
-- Provides **interactive map visualization** with color-coded pins for all schools and institutions across Hong Kong
-- Enables **side-by-side comparison** of up to 3 schools with automatic difference highlighting
-- Offers complete **bilingual support** (English and Traditional Chinese) with instant language switching
-- Delivers a fully **offline-capable** experience after initial data sync
-- Maintains **application status tracking** through a 4-stage stepper (Interested, Visited, Applied, Result)
-- Integrates with **device calendar and push notifications** for admission event reminders
-
 ## Acknowledgments
 
 - **Education Bureau (EDB), HKSAR Government** -- School location and information dataset
@@ -333,10 +289,6 @@ The project was developed using a **plan-driven, iterative approach** across six
 ### Open Data Attribution
 
 This application uses data from the Hong Kong SAR Government's open data portals. The data is provided under the [terms of use](https://data.gov.hk/en/terms-and-conditions) of DATA.GOV.HK.
-
-## Further Information
-
-- **License** -- This project is licensed under the [MIT License](LICENSE)
 
 ---
 
